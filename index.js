@@ -1,8 +1,8 @@
 const osascript = require('node-osascript');
 const fs = require('fs');
 const path = require('path');
-const darkAlacrittyTheme = "catppuccin_frappe"
-const lightAlacrittyTheme = "ashes_light"
+const darkWezTermTheme = "Catppuccin Frappe"
+const lightWezTermTheme = "Catppuccin Latte"
 const {exec} = require('child_process');
 
 function checkAppearance() {
@@ -13,25 +13,25 @@ function checkAppearance() {
           return console.error(err);
         console.log(result ? "Appearance is Dark" : "Appearance is Light");
         if (result) {
-          changeToDarkAlacrittyTheme()
+          changeToDarkWezTermTheme()
         } else {
-          changeToLightAlacrittyTheme()
+          changeToLightWezTermTheme()
         }
       });
 }
 
-function changeToDarkAlacrittyTheme() {
-  changeAlacrittyTheme(lightAlacrittyTheme, darkAlacrittyTheme)
+function changeToDarkWezTermTheme() {
+  changeWezTermTheme(lightWezTermTheme, darkWezTermTheme)
 }
 
-function changeToLightAlacrittyTheme() {
-  changeAlacrittyTheme(darkAlacrittyTheme, lightAlacrittyTheme)
+function changeToLightWezTermTheme() {
+  changeWezTermTheme(darkWezTermTheme, lightWezTermTheme)
 }
 
-function changeAlacrittyTheme(from, to) {
-  console.log(`Changing Alacritty theme to: ${to}`);
+function changeWezTermTheme(from, to) {
+  console.log(`Changing WezTerm theme to: ${to}`);
   const command =
-      `sed -i '' 's/${from}/${to}/' ~/.config/alacritty/alacritty.toml`;
+      `sed -i '' 's/${from}/${to}/' ~/.config/wezterm/wezterm.lua`;
   exec(command, (error, stdout, stderr) => {
     if (error) {
       console.error(`Error changing theme: ${error.message}`);
